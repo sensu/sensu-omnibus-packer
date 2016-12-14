@@ -1,0 +1,29 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "us-west-2",
+      "source_ami": "ami-2a911c1a",
+      "instance_type": "m1.medium",
+      "ssh_username": "root",
+      "ami_name": "sensu-omnibus centos 5 i386 {{timestamp}}",
+      "associate_public_ip_address": true,
+      "ssh_handshake_attempts": 30
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files/CentOS-5-Base.repo",
+      "destination": "/etc/yum.repos.d/CentOS-Base.repo"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/prepare.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/cleanup.sh"
+    }
+  ]
+}
