@@ -4,9 +4,6 @@ write-host "(host) Running User Data Script"
 
 # TODO: User should replace password here with something random. Even better, implement over SSL: https://github.com/packer-community/packer-windows-plugins/issues/30
 # Also note, this user should be removed in Cfn Init
-cmd.exe /c net user /add packer LameInsecurePassword!123
-cmd.exe /c net localgroup administrators packer /add
-
 Set-ExecutionPolicy -ExecutionPolicy bypass -Scope LocalMachine
 
 # RDP
@@ -35,6 +32,5 @@ cmd.exe /c netsh firewall add portopening TCP 5985 "Port 5985"
 cmd.exe /c net stop winrm 
 cmd.exe /c sc config winrm start= auto
 cmd.exe /c net start winrm
-cmd.exe /c wmic useraccount where "name='packer'" set PasswordExpires=FALSE
 
 </powershell>

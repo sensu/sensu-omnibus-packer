@@ -16,8 +16,7 @@
     "ami_name": "windows_base-{{user `timestamp`}}-{{user `git_rev`}}",
     "user_data_file":"./scripts/ec2bootstrap.ps1",
     "communicator": "winrm",
-    "winrm_username": "packer",
-    "winrm_password": "LameInsecurePassword!123",
+    "winrm_username": "Administrator",
     "winrm_timeout": "30m",
     "winrm_port":5985,
     "ami_block_device_mappings": [
