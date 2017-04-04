@@ -13,8 +13,7 @@
 
 [base]
 name=CentOS-$releasever - Base
-mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os
-#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/
+baseurl=http://vault.centos.org/5.11/os/$basearch/
 gpgcheck=1
 gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-5
 protect=1
@@ -22,8 +21,7 @@ protect=1
 #released updates
 [updates]
 name=CentOS-$releasever - Updates
-mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=updates
-#baseurl=http://mirror.centos.org/centos/$releasever/updates/$basearch/
+baseurl=http://vault.centos.org/5.11/updates/$basearch/
 gpgcheck=1
 gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-5
 protect=1
@@ -31,8 +29,7 @@ protect=1
 #packages used/produced in the build but not released
 [addons]
 name=CentOS-$releasever - Addons
-mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=addons
-#baseurl=http://mirror.centos.org/centos/$releasever/addons/$basearch/
+baseurl=http://vault.centos.org/5.11/addons/$basearch/
 gpgcheck=1
 gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-5
 protect=0
@@ -40,8 +37,7 @@ protect=0
 #additional packages that may be useful
 [extras]
 name=CentOS-$releasever - Extras
-mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras
-#baseurl=http://mirror.centos.org/centos/$releasever/extras/$basearch/
+baseurl=http://vault.centos.org/5.11/extras/$basearch/
 gpgcheck=1
 gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-5
 protect=0
@@ -49,8 +45,7 @@ protect=0
 #additional packages that extend functionality of existing packages
 [centosplus]
 name=CentOS-$releasever - Plus
-mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=centosplus
-#baseurl=http://mirror.centos.org/centos/$releasever/centosplus/$basearch/
+baseurl=http://vault.centos.org/5.11/centosplus/$basearch/
 gpgcheck=1
 enabled=0
 gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-5
@@ -59,8 +54,7 @@ protect=0
 #contrib - packages by Centos Users
 [contrib]
 name=CentOS-$releasever - Contrib
-mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=contrib
-#baseurl=http://mirror.centos.org/centos/$releasever/contrib/$basearch/
+baseurl=http://vault.centos.org/5.11/contrib/$basearch/
 gpgcheck=1
 enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
