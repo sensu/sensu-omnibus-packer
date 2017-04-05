@@ -1,0 +1,80 @@
+{
+  "variables": {
+    "source_ami": "ami-09f47d69",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "git_rev": "nohash",
+    "chef_version": "12.19.36",
+    "timestamp": "{{timestamp}}"
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "region": "{{user `region`}}",
+    "availability_zone": "{{user `availability_zone`}}",
+    "instance_type": "m3.xlarge",
+    "source_ami": "{{user `source_ami`}}",
+    "ami_name": "windows_2008r2_base-{{user `timestamp`}}-{{user `git_rev`}}",
+    "user_data_file":"./scripts/ec2bootstrap.ps1",
+    "communicator": "winrm",
+    "winrm_username": "Administrator",
+    "winrm_timeout": "30m",
+    "winrm_port":5985,
+    "ami_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_size": 60,
+          "delete_on_termination": true
+        }
+      ],
+    "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_size": 60,
+          "delete_on_termination": true
+        }
+      ],
+    "run_tags": {
+      "Name": "builder-windows_base-{{user `timestamp`}}-{{user `git_rev`}}",
+      "role": "{{user `role`}}",
+      "commit": "{{user `git_rev`}}"
+    },
+    "tags": {
+      "Name": "windows_base-{{user `timestamp`}}-{{user `git_rev`}}",
+      "role": "{{user `role`}}",
+      "commit": "{{user `git_rev`}}"
+    }
+  }],
+  "provisioners": [
+    {"type": "windows-restart",
+      "restart_timeout": "45m"
+    },
+    {
+      "type":"powershell",
+      "inline": [
+        ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef -version {{user `chef_version`}}"
+      ]
+    },
+    {
+      "type": "chef-solo",
+      "cookbook_paths": ["berks-cookbooks", "site-cookbooks"],
+      "json": {
+        "minitest": {
+          "filter": "nil"
+        },
+        "bootstrap": true
+      },
+      "guest_os_type": "windows",
+      "staging_directory": "c:/Windows/Temp/packer",
+      "skip_install": true,
+      "prevent_sudo": true,
+      "run_list": ["recipe[omnibus]"]
+    },
+    {
+      "type":"powershell",
+      "scripts": [
+        "./scripts/EC2Config.ps1",
+        "./scripts/BundleConfig.ps1"
+      ]
+    }
+  ]
+}

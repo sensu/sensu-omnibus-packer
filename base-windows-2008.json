@@ -13,7 +13,7 @@
     "availability_zone": "{{user `availability_zone`}}",
     "instance_type": "m3.xlarge",
     "source_ami": "{{user `source_ami`}}",
-    "ami_name": "windows_base-{{user `timestamp`}}-{{user `git_rev`}}",
+    "ami_name": "windows_2008r2_base-{{user `timestamp`}}-{{user `git_rev`}}",
     "user_data_file":"./scripts/ec2bootstrap.ps1",
     "communicator": "winrm",
     "winrm_username": "Administrator",
@@ -56,7 +56,7 @@
     },
     {
       "type": "chef-solo",
-      "cookbook_paths": ["berks-cookbooks"],
+      "cookbook_paths": ["berks-cookbooks", "site-cookbooks"],
       "json": {
         "minitest": {
           "filter": "nil"
