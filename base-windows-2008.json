@@ -1,6 +1,6 @@
 {
   "variables": {
-    "source_ami": "ami-09f47d69",
+    "source_ami": "ami-59fc7439",
     "region": "us-west-2",
     "availability_zone": "us-west-2b",
     "git_rev": "nohash",
